@@ -25,8 +25,8 @@ export class AppComponent {
     this.isDisable = true;
   }
 
-  onChangeData(event: any) {
-    this.data = event;
+  onDelete(id: number) {
+    this.data = this.data.filter((el) => el.id != id);
   }
 
   onChangeInput(event: HTMLInputElement) {

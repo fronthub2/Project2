@@ -1,4 +1,4 @@
-<div *ngFor="let data of valueData" data-id="{{ data.id }}">
-  <p>{{ data.id }}. {{ data.title }}</p>
-  <button class="button--delete" (click)="onDelete($event)">X</button>
+<div *ngFor="let data of valueData; let i = index;">
+  <p>{{ i + 1}}. {{ data.title }}</p>
+  <button class="button--delete" (click)="onDelete(data.id)">X</button>
 </div>

@@ -11,14 +11,9 @@ import { IData } from '../interface/todoitem.interface';
 })
 export class TodoComponent {
   @Input() valueData!: IData[];
-  @Output() valueDataChange = new EventEmitter<IData[]>();
+  @Output() onDeleteEvent = new EventEmitter<number>();
 
-  onDelete(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const parent = target.parentElement as HTMLElement;
-    const id = Number(parent.id);
-    this.valueData = this.valueData.filter((data) => data.id !== id);
-    this.valueData.forEach((data, index: number) => (data.id = index + 1));
-    this.valueDataChange.emit(this.valueData);
+  onDelete(id: number) {
+    this.onDeleteEvent.emit(id);
   }
 }

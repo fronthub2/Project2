@@ -1,0 +1,24 @@
+@import url(../style/button.style.scss);
+
+:host {
+  & div {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background-color: black;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
+
+.button--delete {
+  background-color: red;
+}

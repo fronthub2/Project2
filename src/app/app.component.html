@@ -1,0 +1,40 @@
+<!-- <div>
+  <div class="mat-form-field-custom">
+    <mat-form-field>
+      <mat-label>Введите текст</mat-label>
+      <input type="text" #input matInput (input)="onChangeInput(input)" />
+    </mat-form-field>
+    <button
+      (click)="pushTodo(input)"
+      [disabled]="isDisable"
+      class="button--add"
+      [style.opacity]="isDisable ? '0.5' : '1'"
+    >
+      add
+    </button>
+  </div>
+
+  <app-todo [todoData]="appData" (onData)="onChangeData($event)"></app-todo>
+</div> -->
+
+<div>
+  <div class="mat-form-field-custom">
+    <mat-form-field>
+      <mat-label>Введите текст</mat-label>
+      <input type="text" matInput #input (input)="onChangeInput(input)"/>
+    </mat-form-field>
+    <button
+      class="button--add"
+      [disabled]="isDisable"
+      [style.opacity]="isDisable ? '0.5' : '1'"
+      (click)="onAddClick(input)"
+    >
+      add
+    </button>
+  </div>
+
+  <app-todo
+    [valueData]="data"
+    (valueDataChange)="onChangeData($event)"
+  ></app-todo>
+</div>

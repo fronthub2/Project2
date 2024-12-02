@@ -2,7 +2,13 @@
   <div class="mat-form-field-custom">
     <mat-form-field>
       <mat-label>Введите текст</mat-label>
-      <input type="text" matInput #input (input)="onChangeInput(input)"/>
+      <input
+        type="text"
+        matInput
+        #input
+        (input)="onChangeInput(input)"
+        [(ngModel)]="title"
+      />
     </mat-form-field>
     <button
       class="button--add"
@@ -14,8 +20,5 @@
     </button>
   </div>
 
-  <app-todo
-    [valueData]="data"
-    (onDeleteEvent)="onDelete($event)"
-  ></app-todo>
+  <app-todo [valueData]="data" (onDeleteEvent)="onDelete($event)"></app-todo>
 </div>

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { Data } from './interface/todoitem.interface';
 import { TodoComponent } from './todo/todo.component';
@@ -7,18 +8,19 @@ import { TodoComponent } from './todo/todo.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TodoComponent, CommonModule, MatInputModule],
+  imports: [TodoComponent, CommonModule, MatInputModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  title!: string;
   isDisable: boolean = true;
   data = Data;
 
   onAddClick(event: HTMLInputElement) {
     this.data.push({
       id: this.data.length + 1,
-      title: event.value,
+      title: this.title,
     });
 
     event.value = '';

@@ -16,9 +16,13 @@
       [style.opacity]="isDisable ? '0.5' : '1'"
       (click)="onAddClick(input)"
     >
-      add
+      {{ btnTitle }}
     </button>
   </div>
 
-  <app-todo [valueData]="data" (onDeleteEvent)="onDelete($event)"></app-todo>
+  <app-todo
+    [valueData]="data"
+    (onDeleteEvent)="onDelete($event)"
+    (onEditEvent)="onEdit($event)"
+  ></app-todo>
 </div>

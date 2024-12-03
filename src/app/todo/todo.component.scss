@@ -1,7 +1,7 @@
 @import url(../style/button.style.scss);
 
 :host {
-  & div {
+  & .item {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -17,8 +17,18 @@
       right: 0;
     }
   }
-}
 
-.button--delete {
-  background-color: red;
+  & .item--buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  & .button--delete {
+    background-color: red;
+  }
+
+  & .button--edit {
+    background-color: cadetblue;
+  }
 }

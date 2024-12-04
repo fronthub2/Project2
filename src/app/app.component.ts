@@ -14,20 +14,18 @@ import { TodoComponent } from './todo/todo.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  btnTitle!: string;
   getLS = getLocalStorage;
   setLS = setLocalStorage;
-  title!: string;
-  isDisable: boolean = true;
   data = Data;
+  btnTitle: string = 'Add';
+  title!: string;
   index!: number;
+  isDisable: boolean = true;
   isDisableDelete: boolean = false;
 
   constructor() {
-    console.log('note', this.getLS());
     this.data = this.getLS();
     this.setLS(this.data);
-    this.btnTitle = 'Add';
   }
 
   onAddClick(event: HTMLInputElement) {

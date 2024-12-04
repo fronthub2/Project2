@@ -23,6 +23,7 @@
   <app-todo
     [valueData]="data"
     (onDeleteEvent)="onDelete($event)"
+    [isDisableDelete]="isDisableDelete"
     (onEditEvent)="onEdit($event)"
   ></app-todo>
 </div>

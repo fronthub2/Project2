@@ -21,6 +21,7 @@ export class AppComponent {
   isDisable: boolean = true;
   data = Data;
   index!: number;
+  isDisableDelete: boolean = false;
 
   constructor() {
     console.log('note', this.getLS());
@@ -28,40 +29,23 @@ export class AppComponent {
     this.setLS(this.data);
     this.btnTitle = 'Add';
   }
-  // Правильно ли что вынес в отдельный файл?
-  // getLS() {
-  //   const noteJSON = localStorage.getItem('note');
-  //   return noteJSON ? JSON.parse(noteJSON) : [];
-  // }
-
-  // setLS(note: IData[]) {
-  //   localStorage.setItem('note', JSON.stringify(note));
-  // }
 
   onAddClick(event: HTMLInputElement) {
     if (this.btnTitle === 'Edit') {
-      if (!this.data[this.index]) {
-        this.data.push({
-          id: this.data.length + 1,
-          title: this.title,
-        });
-      }
-
       this.data[this.index].title = this.title;
-      this.title = '';
+      this.isDisableDelete = false;
     } else {
-      this.data.push({ /* это нужно вынести отдельно? типо no repeat code? */
+      this.data.push({
         id: this.data.length + 1,
         title: this.title,
       });
-      this.title =
-        ''; /*это костыль, потому что при повторном изменении в input.value ничего не отображается */
     }
 
-    event.value = '';
+    this.btnTitle = 'Add';
     this.isDisable = true;
     this.setLS(this.data);
-    this.btnTitle = 'Add';
+    this.title = '';
+    event.value = '';
   }
 
   onDelete(index: number) {
@@ -69,11 +53,12 @@ export class AppComponent {
     this.setLS(this.data);
   }
 
-  onEdit(inx: number) {
-    this.index = inx;
-    this.isDisable = false;
+  onEdit(index: number) {
+    this.index = index;
     this.btnTitle = 'Edit';
-    this.title = this.data[inx].title;
+    this.isDisable = false;
+    this.isDisableDelete = true;
+    this.title = this.data[index].title;
   }
 
   onChangeInput(event: HTMLInputElement) {

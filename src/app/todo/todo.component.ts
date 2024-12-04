@@ -12,13 +12,14 @@ import { IData } from '../interface/todoitem.interface';
 export class TodoComponent {
   @Input() valueData!: IData[];
   @Output() onDeleteEvent = new EventEmitter<number>();
+  @Input() isDisableDelete!:boolean;
   @Output() onEditEvent = new EventEmitter<number>();
 
   onDelete(index: number) {
     this.onDeleteEvent.emit(index);
   }
 
-  onEdit(inx:number) {
-    this.onEditEvent.emit(inx);
+  onEdit(index:number) {
+    this.onEditEvent.emit(index);
   }
 }

@@ -2,6 +2,13 @@
   <p class="item--text">{{ i + 1 }}. {{ data.title }}</p>
   <div class="item--buttons">
     <button class="button--edit" (click)="onEdit(i)">&check;</button>
-    <button class="button--delete" (click)="onDelete(i)">X</button>
+    <button
+      class="button--delete"
+      (click)="onDelete(i)"
+      [disabled]="isDisableDelete"
+      [style.opacity]="isDisableDelete ? '0.5' : '1'"
+    >
+      X
+    </button>
   </div>
 </div>

@@ -1,5 +1,15 @@
 @import url(../style/button.style.scss);
 
+@keyframes LOADING {
+  0% {
+    transform: rotate(0deg);
+    transform: scale(0.6);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
 :host {
   & .item {
     position: relative;
@@ -30,5 +40,17 @@
 
   & .button--edit {
     background-color: cadetblue;
+  }
+
+  & .iconLoading {
+    margin: 0 auto;
+    width: 30px;
+    height: 30px;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: 2px solid white;
+    border-radius: 50%;
+    animation: LOADING 1s infinite alternate ease-in-out;
   }
 }

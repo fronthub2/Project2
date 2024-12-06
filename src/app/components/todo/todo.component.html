@@ -1,4 +1,6 @@
-<div *ngIf="isLoading" class="iconLoading"></div>
+<div *ngIf="isLoading" class="itemLoading">
+  <div  class="iconLoading"></div>
+</div>
 <ng-container *ngIf="!isLoading">
   <div *ngFor="let data of valueData; let i = index" class="item">
     <p class="item--text">{{ i + 1 }}. {{ data.title }}</p>

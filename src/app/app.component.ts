@@ -2,14 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { ButtonAddComponent } from "./components/button-add/button-add.component";
+import { TodoComponent } from './components/todo/todo.component';
 import { Data } from './interface/todoitem.interface';
 import { getLocalStorage, setLocalStorage } from './localstorage/localstorage';
-import { TodoComponent } from './todo/todo.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TodoComponent, CommonModule, MatInputModule, FormsModule],
+  imports: [TodoComponent, CommonModule, MatInputModule, FormsModule, ButtonAddComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -20,7 +21,7 @@ export class AppComponent {
   btnTitle: string = 'Add';
   title!: string;
   index!: number;
-  isDisable: boolean = true;
+  isDisableAdd: boolean = true;
   isDisableDelete: boolean = false;
 
   constructor() {
@@ -40,7 +41,7 @@ export class AppComponent {
     }
 
     this.btnTitle = 'Add';
-    this.isDisable = true;
+    this.isDisableAdd = true;
     this.setLS(this.data);
     this.title = '';
     event.value = '';
@@ -54,14 +55,13 @@ export class AppComponent {
   onEdit(index: number) {
     this.index = index;
     this.btnTitle = 'Edit';
-    this.isDisable = false;
+    this.isDisableAdd = false;
     this.isDisableDelete = true;
     this.title = this.data[index].title;
   }
-
   onChangeInput(event: HTMLInputElement) {
-    if (!event.value.trim().length) return (this.isDisable = true);
+    if (!event.value.trim().length) return (this.isDisableAdd = true);
 
-    return (this.isDisable = false);
+    return (this.isDisableAdd = false);
   }
 }

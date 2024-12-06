@@ -10,14 +10,11 @@
         [(ngModel)]="title"
       />
     </mat-form-field>
-    <button
-      class="button--add"
-      [disabled]="isDisable"
-      [style.opacity]="isDisable ? '0.5' : '1'"
+    <app-button-add
+      [btnTitle]="btnTitle"
+      [isDisable]="isDisableAdd"
       (click)="onAddClick(input)"
-    >
-      {{ btnTitle }}
-    </button>
+    ></app-button-add>
   </div>
 
   <app-todo

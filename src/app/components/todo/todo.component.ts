@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IData } from '../interface/todoitem.interface';
+import { IData } from '../../interface/todoitem.interface';
 
 @Component({
   selector: 'app-todo',
@@ -10,19 +10,17 @@ import { IData } from '../interface/todoitem.interface';
   styleUrl: './todo.component.scss',
 })
 export class TodoComponent implements OnInit {
-  ngOnInit(): void {
-    console.log('до', this.isLoading);
-    const timeout = setTimeout(() => {
-      this.isLoading = false;
-      console.log('до', this.isLoading);
-    }, 2000);
-  }
-
   @Input() valueData!: IData[];
   @Output() onDeleteEvent = new EventEmitter<number>();
   @Input() isDisableDelete!: boolean;
   @Output() onEditEvent = new EventEmitter<number>();
   isLoading: boolean = true;
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  }
 
   onDelete(index: number) {
     this.onDeleteEvent.emit(index);

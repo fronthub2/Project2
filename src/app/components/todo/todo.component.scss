@@ -1,4 +1,4 @@
-@import url(../style/button.style.scss);
+@import url(../../style/button.style.scss);
 
 @keyframes LOADING {
   0% {
@@ -11,6 +11,8 @@
 }
 
 :host {
+  position: relative;
+
   & .item {
     position: relative;
     display: flex;
@@ -42,8 +44,16 @@
     background-color: cadetblue;
   }
 
+  & .itemLoading {
+    position: fixed;
+    inset: 0;
+    background-color: rgb(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   & .iconLoading {
-    margin: 0 auto;
     width: 30px;
     height: 30px;
     border-top: 2px solid black;

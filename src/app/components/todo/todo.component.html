@@ -1,19 +1,35 @@
 <div *ngIf="isLoading" class="itemLoading">
-  <div  class="iconLoading"></div>
+  <div class="iconLoading"></div>
 </div>
-<ng-container *ngIf="!isLoading">
+<div *ngIf="!isLoading">
   <div *ngFor="let data of valueData; let i = index" class="item">
     <p class="item--text">{{ i + 1 }}. {{ data.title }}</p>
     <div class="item--buttons">
-      <button class="button--edit" (click)="onEdit(i)">&check;</button>
+      <button
+        class="button--edit"
+        matTooltip="Редактировать"
+        (click)="onEdit(i)"
+      >
+        &check;
+      </button>
       <button
         class="button--delete"
-        (click)="onDelete(i)"
+        [matTooltip]="isDisableDelete ? '' : 'Удалить'"
         [disabled]="isDisableDelete"
-        [style.opacity]="isDisableDelete ? '0.5' : '1'"
+        [style.opacity]="isDisableDelete ? 0.5 : 1"
+        (click)="onDelete(i)"
       >
         X
       </button>
+      <button
+        class="button--description"
+        [matTooltip]="isDisableDescription ? '' : 'Описание'"
+        [disabled]="isDisableDescription"
+        [style.opacity]="isDisableDescription ? 0.5 : 1"
+        (click)="onDescription(i)"
+      >
+        ?
+      </button>
     </div>
   </div>
-</ng-container>
+</div>

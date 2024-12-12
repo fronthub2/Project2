@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { ButtonAddComponent } from "./components/button-add/button-add.component";
+import { ButtonAddComponent } from './components/button-add/button-add.component';
+import { DescriptionComponent } from './components/description/description.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { Data } from './interface/todoitem.interface';
 import { getLocalStorage, setLocalStorage } from './localstorage/localstorage';
@@ -10,46 +11,64 @@ import { getLocalStorage, setLocalStorage } from './localstorage/localstorage';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [TodoComponent, CommonModule, MatInputModule, FormsModule, ButtonAddComponent],
+  imports: [
+    TodoComponent,
+    CommonModule,
+    MatInputModule,
+    FormsModule,
+    ButtonAddComponent,
+    DescriptionComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   getLS = getLocalStorage;
   setLS = setLocalStorage;
+  isDisableAdd = true;
+  isDisableDelete = false;
+  isDisableDescription = false;
+  isShowDescription = false;
   data = Data;
-  btnTitle: string = 'Add';
+  btnTitle = 'Add';
   title!: string;
   index!: number;
-  isDisableAdd: boolean = true;
-  isDisableDelete: boolean = false;
+  textarea!: string;
+  textDescription!: string;
+  titleDescription!: string;
+  timeDescription!: string;
 
   constructor() {
     this.data = this.getLS();
     this.setLS(this.data);
   }
 
-  onAddClick(event: HTMLInputElement) {
+  onAddClick(input: HTMLInputElement) {
     if (this.btnTitle === 'Edit') {
       this.data[this.index].title = this.title;
+      this.data[this.index].description = this.textarea;
       this.isDisableDelete = false;
     } else {
       this.data.push({
         id: this.data.length + 1,
         title: this.title,
+        description: this.textarea,
+        time: new Date().toLocaleTimeString(),
       });
     }
-
     this.btnTitle = 'Add';
+    this.isDisableDescription = false;
     this.isDisableAdd = true;
     this.setLS(this.data);
     this.title = '';
-    event.value = '';
+    this.textarea = '';
+    input.value = '';
   }
 
   onDelete(index: number) {
     this.data.splice(index, 1);
     this.setLS(this.data);
+    this.isShowDescription = false;
   }
 
   onEdit(index: number) {
@@ -57,11 +76,26 @@ export class AppComponent {
     this.btnTitle = 'Edit';
     this.isDisableAdd = false;
     this.isDisableDelete = true;
+    this.isDisableDescription = true;
     this.title = this.data[index].title;
+    this.isShowDescription = false;
+    this.textarea = this.data[index].description;
+    this.data[index].time = new Date().toLocaleTimeString();
+    this.textDescription = '';
   }
+
   onChangeInput(event: HTMLInputElement) {
     if (!event.value.trim().length) return (this.isDisableAdd = true);
 
     return (this.isDisableAdd = false);
+  }
+
+  onDescription(i: number) {
+    this.isShowDescription = true;
+    this.titleDescription = this.data[i].title;
+    this.textDescription = this.data[i].description
+      ? this.data[i].description
+      : '--';
+    this.timeDescription = this.data[i].time;
   }
 }

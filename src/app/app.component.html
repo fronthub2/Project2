@@ -16,11 +16,19 @@
       (click)="onAddClick(input)"
     ></app-button-add>
   </div>
-
+  <textarea placeholder="Описание" [(ngModel)]="textarea"></textarea>
   <app-todo
     [valueData]="data"
-    (onDeleteEvent)="onDelete($event)"
+    (DeleteEvent)="onDelete($event)"
     [isDisableDelete]="isDisableDelete"
-    (onEditEvent)="onEdit($event)"
+    (EditEvent)="onEdit($event)"
+    [isDisableDescription]="isDisableDescription"
+    (DescriptionEvent)="onDescription($event)"
   ></app-todo>
 </div>
+<app-description
+  [isShow]="isShowDescription"
+  [titleDescription]="titleDescription"
+  [textDescription]="textDescription"
+  [timeDescription]="timeDescription"
+></app-description>

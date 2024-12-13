@@ -38,4 +38,12 @@ export class TodoComponent implements OnInit {
   onDescription(i: number) {
     this.DescriptionEvent.emit(i);
   }
+
+  onSelected(event:MouseEvent) {
+    const items = document.querySelectorAll('.item');
+    items.forEach((item) => item.classList.remove('selected'));
+    const target = event.target as HTMLElement;
+    const item = target.closest('.item') as HTMLElement;
+    item.classList.add('selected');
+  }
 }

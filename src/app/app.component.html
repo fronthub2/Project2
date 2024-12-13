@@ -32,3 +32,11 @@
   [textDescription]="textDescription"
   [timeDescription]="timeDescription"
 ></app-description>
+<app-modal
+  *ngIf="isShow"
+  [index]="index"
+  [isShow]="isShow"
+  (isShowEvent)="onShow($event)"
+  (dataEvent)="onUpdate($event)"
+>
+</app-modal>

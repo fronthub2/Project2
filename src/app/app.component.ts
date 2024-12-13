@@ -5,8 +5,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ButtonAddComponent } from './components/button-add/button-add.component';
 import { DescriptionComponent } from './components/description/description.component';
 import { TodoComponent } from './components/todo/todo.component';
-import { Data } from './interface/todoitem.interface';
+import { Data, IData } from './interface/todoitem.interface';
 import { getLocalStorage, setLocalStorage } from './localstorage/localstorage';
+import { ModalComponent } from './share/modal/component/modal/modal.component';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +19,15 @@ import { getLocalStorage, setLocalStorage } from './localstorage/localstorage';
     FormsModule,
     ButtonAddComponent,
     DescriptionComponent,
+    ModalComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  isShow = false;
+  title2!: string;
+
   getLS = getLocalStorage;
   setLS = setLocalStorage;
   isDisableAdd = true;
@@ -66,9 +71,17 @@ export class AppComponent {
   }
 
   onDelete(index: number) {
-    this.data.splice(index, 1);
-    this.setLS(this.data);
-    this.isShowDescription = false;
+    this.isShow = !this.isShow;
+    this.index = index;
+    console.log('index', this.index);
+  }
+
+  onUpdate(event: IData[]) {
+    this.data = event;
+  }
+
+  onShow(event: boolean) {
+    this.isShow = event;
   }
 
   onEdit(index: number) {

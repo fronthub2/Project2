@@ -27,6 +27,7 @@
         [disabled]="isDisableDescription"
         [style.opacity]="isDisableDescription ? 0.5 : 1"
         (click)="onDescription(i)"
+        (click)="onSelected($event)"
       >
         ?
       </button>
